@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="20dp">
+
+        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+            android:text="Configurações" android:textColor="@color/text_primary"
+            android:textSize="26sp" android:textStyle="bold" android:layout_marginBottom="24dp"/>
+
+        <!-- Serviço -->
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent" android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp" app:cardBackgroundColor="@color/surface"
+            app:cardCornerRadius="16dp" app:strokeWidth="1dp" app:strokeColor="@color/border">
+            <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+                android:orientation="horizontal" android:gravity="center_vertical" android:padding="16dp">
+                <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content"
+                    android:layout_weight="1" android:orientation="vertical">
+                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                        android:text="Monitoramento ativo" android:textColor="@color/text_primary"
+                        android:textSize="15sp" android:textStyle="bold"/>
+                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                        android:text="Detecta gestos em segundo plano"
+                        android:textColor="@color/text_secondary" android:textSize="12sp" android:layout_marginTop="2dp"/>
+                </LinearLayout>
+                <com.google.android.material.switchmaterial.SwitchMaterial
+                    android:id="@+id/switchServico" android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+        <!-- Sensibilidade -->
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent" android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp" app:cardBackgroundColor="@color/surface"
+            app:cardCornerRadius="16dp" app:strokeWidth="1dp" app:strokeColor="@color/border">
+            <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+                android:orientation="vertical" android:padding="16dp">
+                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                    android:text="Sensibilidade do sensor" android:textColor="@color/text_primary"
+                    android:textSize="15sp" android:textStyle="bold" android:layout_marginBottom="4dp"/>
+                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                    android:text="Alta = detecta movimentos menores" android:textColor="@color/text_secondary"
+                    android:textSize="12sp" android:layout_marginBottom="12dp"/>
+                <RadioGroup android:id="@+id/radioGroupSens" android:layout_width="match_parent"
+                    android:layout_height="wrap_content" android:orientation="horizontal">
+                    <RadioButton android:id="@+id/radioAlta" android:layout_width="0dp"
+                        android:layout_height="wrap_content" android:layout_weight="1"
+                        android:text="Alta" android:textColor="@color/text_primary"/>
+                    <RadioButton android:id="@+id/radioMedia" android:layout_width="0dp"
+                        android:layout_height="wrap_content" android:layout_weight="1"
+                        android:text="Média" android:textColor="@color/text_primary" android:checked="true"/>
+                    <RadioButton android:id="@+id/radioBaixa" android:layout_width="0dp"
+                        android:layout_height="wrap_content" android:layout_weight="1"
+                        android:text="Baixa" android:textColor="@color/text_primary"/>
+                </RadioGroup>
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+        <!-- Versão -->
+        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+            android:text="GestureX v1.0 — N700 Plataformas Móveis"
+            android:textColor="@color/text_secondary" android:textSize="12sp"
+            android:layout_marginTop="8dp"/>
+
+    </LinearLayout>
+</ScrollView>

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">GestureX</string>
+    <string name="tab_gestures">Gestos</string>
+    <string name="tab_settings">Config</string>
+    <string name="novo_gesto">Novo Gesto</string>
+    <string name="editar_gesto">Editar Gesto</string>
+    <string name="gravar_gesto">Gravar Gesto</string>
+    <string name="salvar">Salvar</string>
+    <string name="cancelar">Cancelar</string>
+    <string name="deletar">Deletar</string>
+    <string name="monitorando">Monitorando gestos</string>
+    <string name="servico_pausado">Serviço pausado</string>
+    <string name="nenhum_gesto">Nenhum gesto criado ainda.\nToque em + para começar.</string>
+    <string name="nome_gesto_hint">Nome do gesto</string>
+    <string name="aguardando">Aguardando movimento…</string>
+    <string name="gravando">Gravando… faça o gesto!</string>
+    <string name="gesto_salvo">Gesto salvo com sucesso!</string>
+    <string name="iniciar_gravacao">Iniciar Gravação</string>
+    <string name="parar_gravacao">Parar Gravação</string>
+    <string name="escolher_acao">Escolher ação</string>
+    <string name="escolher_app">Escolher app</string>
+    <string name="escolher_contato">Escolher contato</string>
+    <string name="sensibilidade">Sensibilidade do sensor</string>
+    <string name="servico_ativo">Monitoramento ativo</string>
+    <string name="notification_title">GestureX ativo</string>
+    <string name="notification_text">Monitorando seus gestos em segundo plano</string>
+    <string name="channel_name">GestureX — Monitoramento</string>
+</resources>

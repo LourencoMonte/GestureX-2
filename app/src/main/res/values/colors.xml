@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="primary">#3D5AFE</color>
+    <color name="primary_dark">#1A237E</color>
+    <color name="primary_light">#E8EAF6</color>
+    <color name="background">#0D0D1A</color>
+    <color name="surface">#16162A</color>
+    <color name="surface2">#1E1E38</color>
+    <color name="text_primary">#EEEEFF</color>
+    <color name="text_secondary">#6B6B99</color>
+    <color name="gesture_blue">#3D5AFE</color>
+    <color name="gesture_teal">#00C896</color>
+    <color name="gesture_amber">#FFB300</color>
+    <color name="gesture_pink">#FF4D8D</color>
+    <color name="gesture_purple">#9C27B0</color>
+    <color name="gesture_orange">#FF6D00</color>
+    <color name="success">#00C896</color>
+    <color name="error">#FF5252</color>
+    <color name="border">#2A2A4A</color>
+    <color name="white">#FFFFFF</color>
+    <color name="black">#000000</color>
+</resources>
