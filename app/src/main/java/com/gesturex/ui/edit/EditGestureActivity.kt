@@ -95,14 +95,15 @@ class EditGestureActivity : AppCompatActivity() {
         b.cardAcaoSilenciar.setOnClickListener{ acaoSelecionada = AcaoGesto.SILENCIAR;  atualizarSelecaoAcao() }
         b.cardAcaoLigar.setOnClickListener    { acaoSelecionada = AcaoGesto.LIGAR_PARA; atualizarSelecaoAcao() }
         b.btnEscolherApp.setOnClickListener   { pickApp.launch(Intent(this, AppPickerActivity::class.java)) }
-        b.btnEscolherContato.setOnClickListener { pickContact.launch(Uri.EMPTY) }
+        b.btnEscolherContato.setOnClickListener { pickContact.launch() }
         atualizarSelecaoAcao()
     }
 
     private fun atualizarSelecaoAcao() {
         val sel = com.google.android.material.color.MaterialColors.getColor(this, com.google.android.material.R.attr.colorPrimary, 0)
         listOf(b.cardAcaoApp, b.cardAcaoLanterna, b.cardAcaoSilenciar, b.cardAcaoLigar).forEach {
-            it.strokeWidth = 0; it.strokeColor = android.content.res.ColorStateList.valueOf(0)
+            it.strokeWidth = 0
+            it.setStrokeColor(0)
         }
         val card = when (acaoSelecionada) {
             AcaoGesto.ABRIR_APP  -> b.cardAcaoApp
@@ -112,8 +113,7 @@ class EditGestureActivity : AppCompatActivity() {
             else -> b.cardAcaoApp
         }
         card.strokeWidth = 4
-        card.strokeColor = android.content.res.ColorStateList.valueOf(
-            resources.getColor(R.color.primary, theme))
+        card.setStrokeColor(resources.getColor(R.color.primary, theme))
         b.layoutEscolherApp.visibility     = if (acaoSelecionada == AcaoGesto.ABRIR_APP)  View.VISIBLE else View.GONE
         b.layoutEscolherContato.visibility = if (acaoSelecionada == AcaoGesto.LIGAR_PARA) View.VISIBLE else View.GONE
         if (appNome.isNotBlank()) { b.textAppSelecionado.text = "App: $appNome"; b.textAppSelecionado.visibility = View.VISIBLE }
