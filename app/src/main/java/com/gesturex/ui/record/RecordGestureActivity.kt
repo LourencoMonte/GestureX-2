@@ -17,7 +17,8 @@ import com.google.gson.Gson
 class RecordGestureActivity : AppCompatActivity(), SensorEventListener {
     private lateinit var b: ActivityRecordGestureBinding
     private lateinit var sm: SensorManager
-    private var sensor: Sensor? = null
+    private var acelerometro: Sensor? = null
+    private var giroscopio: Sensor? = null
     private val recorder = GestureRecorder()
     private var gravando = false
 
@@ -26,9 +27,10 @@ class RecordGestureActivity : AppCompatActivity(), SensorEventListener {
         b = ActivityRecordGestureBinding.inflate(layoutInflater)
         setContentView(b.root)
         sm = getSystemService(Context.SENSOR_SERVICE) as SensorManager
-        sensor = sm.getDefaultSensor(Sensor.TYPE_ACCELEROMETER)
+        acelerometro = sm.getDefaultSensor(Sensor.TYPE_ACCELEROMETER)
+        giroscopio = sm.getDefaultSensor(Sensor.TYPE_GYROSCOPE)
 
-        if (sensor == null) {
+        if (acelerometro == null) {
             b.textStatus.text = "Acelerômetro não disponível"; b.btnGravar.isEnabled = false
         }
 
@@ -38,21 +40,29 @@ class RecordGestureActivity : AppCompatActivity(), SensorEventListener {
 
     override fun onResume() {
         super.onResume()
-        sensor?.let { sm.registerListener(this, it, SensorManager.SENSOR_DELAY_GAME) }
+        acelerometro?.let { sm.registerListener(this, it, SensorManager.SENSOR_DELAY_GAME) }
+        giroscopio?.let { sm.registerListener(this, it, SensorManager.SENSOR_DELAY_GAME) }
     }
 
     override fun onPause() { super.onPause(); sm.unregisterListener(this) }
 
     override fun onSensorChanged(e: SensorEvent?) {
-        e ?: return; if (e.sensor.type != Sensor.TYPE_ACCELEROMETER) return
-        val x = e.values[0]; val y = e.values[1]; val z = e.values[2]
-        b.textEixoX.text = "X: ${"%.1f".format(x)}"
-        b.textEixoY.text = "Y: ${"%.1f".format(y)}"
-        b.textEixoZ.text = "Z: ${"%.1f".format(z)}"
-        b.progressX.progress = norm(x)
-        b.progressY.progress = norm(y)
-        b.progressZ.progress = norm(z)
-        if (gravando) recorder.adicionar(x, y, z)
+        e ?: return
+        when (e.sensor.type) {
+            Sensor.TYPE_ACCELEROMETER -> {
+                val x = e.values[0]; val y = e.values[1]; val z = e.values[2]
+                b.textEixoX.text = "X: ${"%.1f".format(x)}"
+                b.textEixoY.text = "Y: ${"%.1f".format(y)}"
+                b.textEixoZ.text = "Z: ${"%.1f".format(z)}"
+                b.progressX.progress = norm(x)
+                b.progressY.progress = norm(y)
+                b.progressZ.progress = norm(z)
+                if (gravando) recorder.adicionar(x, y, z)
+            }
+            Sensor.TYPE_GYROSCOPE -> {
+                if (gravando) recorder.adicionarGyro(e.values[0], e.values[1], e.values[2])
+            }
+        }
     }
 
     override fun onAccuracyChanged(s: Sensor?, a: Int) {}

@@ -21,6 +21,7 @@ class GestureService : Service(), SensorEventListener {
 
     private lateinit var sensorManager: SensorManager
     private var acelerometro: Sensor? = null
+    private var giroscopio: Sensor? = null
     private val scope = CoroutineScope(Dispatchers.IO + SupervisorJob())
     private val detector = GestureDetectorUtil()
     private lateinit var dispatcher: ActionDispatcher
@@ -45,6 +46,7 @@ class GestureService : Service(), SensorEventListener {
         dispatcher = ActionDispatcher(this)
         sensorManager = getSystemService(SENSOR_SERVICE) as SensorManager
         acelerometro = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER)
+        giroscopio = sensorManager.getDefaultSensor(Sensor.TYPE_GYROSCOPE)
         criarCanal()
         startForeground(NOTIF_ID, buildNotif())
         val prefs = getSharedPreferences("gesturex_prefs", Context.MODE_PRIVATE)
@@ -54,14 +56,21 @@ class GestureService : Service(), SensorEventListener {
 
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
         acelerometro?.let { sensorManager.registerListener(this, it, SensorManager.SENSOR_DELAY_GAME) }
+        giroscopio?.let { sensorManager.registerListener(this, it, SensorManager.SENSOR_DELAY_GAME) }
         return START_STICKY
     }
 
     override fun onSensorChanged(event: SensorEvent?) {
         event ?: return
-        if (event.sensor.type != Sensor.TYPE_ACCELEROMETER) return
-        val gesto = detector.processar(event.values[0], event.values[1], event.values[2], gestosAtivos)
-        gesto?.let { scope.launch(Dispatchers.Main) { dispatcher.executar(it) } }
+        when (event.sensor.type) {
+            Sensor.TYPE_GYROSCOPE -> {
+                detector.processarGiroscopio(event.values[0], event.values[1], event.values[2])
+            }
+            Sensor.TYPE_ACCELEROMETER -> {
+                val gesto = detector.processar(event.values[0], event.values[1], event.values[2], gestosAtivos)
+                gesto?.let { scope.launch(Dispatchers.Main) { dispatcher.executar(it) } }
+            }
+        }
     }
 
     override fun onAccuracyChanged(sensor: Sensor?, accuracy: Int) {}
