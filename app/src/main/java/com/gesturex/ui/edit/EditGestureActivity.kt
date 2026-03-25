@@ -95,7 +95,7 @@ class EditGestureActivity : AppCompatActivity() {
         b.cardAcaoSilenciar.setOnClickListener{ acaoSelecionada = AcaoGesto.SILENCIAR;  atualizarSelecaoAcao() }
         b.cardAcaoLigar.setOnClickListener    { acaoSelecionada = AcaoGesto.LIGAR_PARA; atualizarSelecaoAcao() }
         b.btnEscolherApp.setOnClickListener   { pickApp.launch(Intent(this, AppPickerActivity::class.java)) }
-        b.btnEscolherContato.setOnClickListener { pickContact.launch() }
+        b.btnEscolherContato.setOnClickListener { pickContact.launch(null) }
         atualizarSelecaoAcao()
     }
 
